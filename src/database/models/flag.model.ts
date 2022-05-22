@@ -2,9 +2,9 @@ import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
 
-export interface RoleInterface {
+interface FlagInterface {
   id: string;
-  role: string;
+  flag: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: string;
@@ -16,24 +16,24 @@ export interface RoleInterface {
 
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
-export class Role extends Model<RoleInterface> implements RoleInterface {
+export class Flag extends Model<FlagInterface> implements FlagInterface {
   public id!: string;
-  public role!: string;
+  public flag!: string;
   public createdAt!: string;
   public updatedAt!: string;
   public deletedAt!: string;
   static associate: (models: any) => {};
 }
 
-export const RoleInit = (sequelize: Sequelize) => {
-  Role.init(
+export const FlagInit = (sequelize: Sequelize) => {
+  Flag.init(
     {
       id: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
       },
-      role: {
+      flag: {
         allowNull: false,
         type: DataTypes.STRING(100),
         unique: true,
@@ -52,20 +52,20 @@ export const RoleInit = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: TableNames.ROLE,
+      modelName: TableNames.FLAG,
       paranoid: true,
     }
   );
 
-  Role.associate = (models: any): any => {
-    Role.beforeCreate((Role, _) => {
-      Role.id = uuidv4();
+  Flag.associate = (models: Record<string, any>): any => {
+    Flag.beforeCreate((Flag, _) => {
+      Flag.id = uuidv4();
     });
 
-    Role.belongsTo(models.User(sequelize), {
-      foreignKey: 'userId',
+    Flag.belongsTo(models.Beach(sequelize), {
+      foreignKey: 'flagId',
     });
   };
 
-  return Role;
+  return Flag;
 };

@@ -1,19 +1,17 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
-import { models } from './index';
 
-export interface UserInterface {
+interface UserBeachInterface {
   id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  deposit: number;
-  roleId: string;
+  userId: string;
+  beachId: string;
+  sets: number;
+  seatPrice: number;
+  umbrellaPrice: number;
   createdAt: string;
   updatedAt: string;
   deletedAt: string;
-
   associate?(models: Record<string, any>): void;
 }
 
@@ -22,48 +20,52 @@ export interface UserInterface {
 
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
-export class User extends Model<UserInterface> implements UserInterface {
+export class UserBeach
+  extends Model<UserBeachInterface>
+  implements UserBeachInterface
+{
   public id!: string;
-  public email!: string;
-  public firstName!: string;
-  public lastName!: string;
-  public deposit!: number;
-  public roleId!: string;
+  public userId!: string;
+  public beachId!: string;
+  public sets!: number;
+  public seatPrice!: number;
+  public umbrellaPrice!: number;
   public createdAt!: string;
   public updatedAt!: string;
   public deletedAt!: string;
   static associate: (models: any) => {};
 }
 
-export const UserInit = (sequelize: Sequelize) => {
-  User.init(
+export const UserBeachInit = (sequelize: Sequelize) => {
+  UserBeach.init(
     {
       id: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
       },
-      email: {
+      userId: {
         allowNull: false,
-        type: DataTypes.STRING(100),
-        unique: true,
+        type: DataTypes.UUID,
+        defaultValue: '',
       },
-      firstName: {
+      beachId: {
         allowNull: false,
-        type: DataTypes.STRING(100),
+        type: DataTypes.UUID,
       },
-      lastName: {
+      sets: {
         allowNull: false,
-        type: DataTypes.STRING(100),
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
-      deposit: {
+      seatPrice: {
         allowNull: false,
         type: DataTypes.FLOAT,
         defaultValue: 0,
       },
-      roleId: {
+      umbrellaPrice: {
         allowNull: false,
-        type: DataTypes.UUID,
+        type: DataTypes.FLOAT,
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -79,25 +81,18 @@ export const UserInit = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: TableNames.USER,
+      modelName: TableNames.USER_BEACH,
       paranoid: true,
-      freezeTableName: true,
     }
   );
-
-  User.beforeCreate((User, _) => {
-    User.id = uuidv4();
-  });
-
-  User.associate = (models: any): any => {
-    User.hasOne(models.Role(sequelize), { foreignKey: 'roleId' });
-    User.belongsTo(models.Beach(sequelize), {
-      foreignKey: 'beachAdminId',
+  UserBeach.associate = (models: Record<string, any>): any => {
+    UserBeach.beforeCreate((UserBeach, _) => {
+      UserBeach.id = uuidv4();
     });
-    User.belongsTo(models.UserBeach(sequelize), {
-      foreignKey: 'userId',
-    });
+
+    UserBeach.hasOne(models.User(sequelize), { foreignKey: 'userId' });
+    UserBeach.hasOne(models.Beach(sequelize), { foreignKey: 'beachId' });
   };
 
-  return User;
+  return UserBeach;
 };

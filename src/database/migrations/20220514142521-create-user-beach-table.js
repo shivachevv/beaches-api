@@ -1,32 +1,42 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('User', {
+    queryInterface.createTable('UserBeach', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.DataTypes.UUID,
       },
-      email: {
+      userId: {
         allowNull: false,
-        type: Sequelize.DataTypes.STRING(100),
-        unique: true,
+        type: Sequelize.DataTypes.UUID,
+        references: {
+          model: {
+            tableName: 'User',
+          },
+        },
       },
-      firstName: {
+      beachId: {
         allowNull: false,
-        type: Sequelize.DataTypes.STRING(100),
+        type: Sequelize.DataTypes.UUID,
+        references: {
+          model: {
+            tableName: 'Beach',
+          },
+        },
       },
-      lastName: {
+      sets: {
         allowNull: false,
-        type: Sequelize.DataTypes.STRING(100),
+        type: Sequelize.DataTypes.INTEGER,
+        defaultValue: 0,
       },
-      deposit: {
+      seatPrice: {
         allowNull: false,
         type: Sequelize.DataTypes.FLOAT,
         defaultValue: 0,
       },
-      roleId: {
+      umbrellaPrice: {
         allowNull: false,
-        type: Sequelize.DataTypes.UUID,
+        type: Sequelize.DataTypes.FLOAT,
       },
       createdAt: {
         type: Sequelize.DataTypes.DATE,
@@ -41,5 +51,5 @@ module.exports = {
       },
     }),
 
-  down: async (queryInterface) => queryInterface.dropTable('User'),
+  down: async (queryInterface) => queryInterface.dropTable('UserBeach'),
 };

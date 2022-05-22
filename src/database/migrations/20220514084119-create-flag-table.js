@@ -1,12 +1,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('Role', {
+    queryInterface.createTable('Flag', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.DataTypes.UUID,
       },
-      role: {
+      flag: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING(100),
         unique: true,
@@ -24,5 +24,5 @@ module.exports = {
       },
     }),
 
-  down: async (queryInterface) => queryInterface.dropTable('Role'),
+  down: async (queryInterface) => queryInterface.dropTable('Flag'),
 };

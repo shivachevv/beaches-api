@@ -9,9 +9,8 @@ const port = process.env.SERVER_PORT || 3000;
 
 const app: Application = express();
 
-dbInitialize();
-
 middlewareConfig(app);
+dbInitialize();
 
 routes(app);
 
