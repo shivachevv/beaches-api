@@ -50,6 +50,7 @@ export const BeachInit = (sequelize: Sequelize) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         allowNull: false,
@@ -111,6 +112,7 @@ export const BeachInit = (sequelize: Sequelize) => {
       sequelize,
       modelName: TableNames.BEACH,
       paranoid: true,
+      freezeTableName: true,
     }
   );
 
@@ -121,7 +123,7 @@ export const BeachInit = (sequelize: Sequelize) => {
 
     Beach.hasOne(models.Flag(sequelize), { foreignKey: 'flagId' });
     Beach.hasOne(models.User(sequelize), { foreignKey: 'beachAdminId' });
-    Beach.belongsTo(models.UserBeach(sequelize), {
+    Beach.hasMany(models.UserBeach(sequelize), {
       foreignKey: 'beachId',
     });
   };

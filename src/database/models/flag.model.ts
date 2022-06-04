@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 interface FlagInterface {
   id: string;
   flag: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
 
@@ -19,9 +19,9 @@ interface FlagInterface {
 export class Flag extends Model<FlagInterface> implements FlagInterface {
   public id!: string;
   public flag!: string;
-  public createdAt!: string;
-  public updatedAt!: string;
-  public deletedAt!: string;
+  public createdAt?: string;
+  public updatedAt?: string;
+  public deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -32,6 +32,7 @@ export const FlagInit = (sequelize: Sequelize) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
       },
       flag: {
         allowNull: false,
@@ -39,9 +40,11 @@ export const FlagInit = (sequelize: Sequelize) => {
         unique: true,
       },
       createdAt: {
+        allowNull: true,
         type: DataTypes.DATE,
       },
       updatedAt: {
+        allowNull: true,
         type: DataTypes.DATE,
       },
       deletedAt: {
@@ -54,6 +57,7 @@ export const FlagInit = (sequelize: Sequelize) => {
       sequelize,
       modelName: TableNames.FLAG,
       paranoid: true,
+      freezeTableName: true,
     }
   );
 
