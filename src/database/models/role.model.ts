@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 export interface RoleInterface {
   id: string;
   role: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
 
@@ -19,9 +19,9 @@ export interface RoleInterface {
 export class Role extends Model<RoleInterface> implements RoleInterface {
   public id!: string;
   public role!: string;
-  public createdAt!: string;
-  public updatedAt!: string;
-  public deletedAt!: string;
+  public createdAt?: string;
+  public updatedAt?: string;
+  public deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -32,6 +32,7 @@ export const RoleInit = (sequelize: Sequelize) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
       },
       role: {
         allowNull: false,
@@ -39,9 +40,11 @@ export const RoleInit = (sequelize: Sequelize) => {
         unique: true,
       },
       createdAt: {
+        allowNull: true,
         type: DataTypes.DATE,
       },
       updatedAt: {
+        allowNull: true,
         type: DataTypes.DATE,
       },
       deletedAt: {
@@ -54,6 +57,7 @@ export const RoleInit = (sequelize: Sequelize) => {
       sequelize,
       modelName: TableNames.ROLE,
       paranoid: true,
+      freezeTableName: true,
     }
   );
 

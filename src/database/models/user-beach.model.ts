@@ -9,9 +9,9 @@ interface UserBeachInterface {
   sets: number;
   seatPrice: number;
   umbrellaPrice: number;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
 
@@ -30,9 +30,9 @@ export class UserBeach
   public sets!: number;
   public seatPrice!: number;
   public umbrellaPrice!: number;
-  public createdAt!: string;
-  public updatedAt!: string;
-  public deletedAt!: string;
+  public createdAt?: string;
+  public updatedAt?: string;
+  public deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -43,6 +43,7 @@ export const UserBeachInit = (sequelize: Sequelize) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
       },
       userId: {
         allowNull: false,
@@ -68,9 +69,11 @@ export const UserBeachInit = (sequelize: Sequelize) => {
         type: DataTypes.FLOAT,
       },
       createdAt: {
+        allowNull: true,
         type: DataTypes.DATE,
       },
       updatedAt: {
+        allowNull: true,
         type: DataTypes.DATE,
       },
       deletedAt: {
@@ -83,6 +86,7 @@ export const UserBeachInit = (sequelize: Sequelize) => {
       sequelize,
       modelName: TableNames.USER_BEACH,
       paranoid: true,
+      freezeTableName: true,
     }
   );
   UserBeach.associate = (models: Record<string, any>): any => {
@@ -90,8 +94,8 @@ export const UserBeachInit = (sequelize: Sequelize) => {
       UserBeach.id = uuidv4();
     });
 
-    UserBeach.hasOne(models.User(sequelize), { foreignKey: 'userId' });
-    UserBeach.hasOne(models.Beach(sequelize), { foreignKey: 'beachId' });
+    UserBeach.belongsTo(models.User(sequelize), { foreignKey: 'userId' });
+    UserBeach.belongsTo(models.Beach(sequelize), { foreignKey: 'beachId' });
   };
 
   return UserBeach;
