@@ -10,20 +10,20 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.DataTypes.UUID,
-        references: {
-          model: {
-            tableName: 'User',
-          },
-        },
+        // references: {
+        //   model: {
+        //     tableName: 'User',
+        //   },
+        // },
       },
       beachId: {
         allowNull: false,
         type: Sequelize.DataTypes.UUID,
-        references: {
-          model: {
-            tableName: 'Beach',
-          },
-        },
+        // references: {
+        //   model: {
+        //     tableName: 'Beach',
+        //   },
+        // },
       },
       sets: {
         allowNull: false,
