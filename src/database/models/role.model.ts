@@ -3,7 +3,7 @@ import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface RoleInterface {
-  id: string;
+  id?: string;
   role: string;
   createdAt?: string;
   updatedAt?: string;
@@ -17,7 +17,7 @@ export interface RoleInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Role extends Model<RoleInterface> implements RoleInterface {
-  public id!: string;
+  public id?: string;
   public role!: string;
   public createdAt?: string;
   public updatedAt?: string;
@@ -66,7 +66,7 @@ export const RoleInit = (sequelize: Sequelize) => {
       Role.id = uuidv4();
     });
 
-    Role.belongsTo(models.User(sequelize), {
+    Role.hasMany(models.User(sequelize), {
       foreignKey: 'userId',
     });
   };

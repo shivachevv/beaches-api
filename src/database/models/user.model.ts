@@ -93,7 +93,7 @@ export const UserInit = (sequelize: Sequelize) => {
   });
 
   User.associate = (models: any): any => {
-    User.hasOne(models.Role(sequelize), { foreignKey: 'roleId' });
+    User.belongsTo(models.Role(sequelize), { foreignKey: 'roleId' });
     User.belongsTo(models.Beach(sequelize), {
       foreignKey: 'beachAdminId',
     });

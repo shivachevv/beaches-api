@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import UserService from './user.service';
 import BaseController from '../../declarations/base-controller';
+import Role from './role.service';
 
 interface UserControllerInterface {
   get(req: Request, res: Response): Promise<Response>;
@@ -10,10 +10,10 @@ interface UserControllerInterface {
   delete(req: Request, res: Response): Promise<Response>;
 }
 
-class UserController extends BaseController implements UserControllerInterface {
+class RoleController extends BaseController implements UserControllerInterface {
   public async get(req: Request, res: Response) {
     try {
-      const result = await UserService.get();
+      const result = await Role.get();
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -21,7 +21,7 @@ class UserController extends BaseController implements UserControllerInterface {
   }
   public async getById(req: Request, res: Response) {
     try {
-      const result = await UserService.getById(req.params.userId);
+      const result = await Role.getById(req.params.roleId);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -30,7 +30,7 @@ class UserController extends BaseController implements UserControllerInterface {
 
   async create(req: Request, res: Response) {
     try {
-      const result = await UserService.create(req.body);
+      const result = await Role.create(req.body);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -38,7 +38,7 @@ class UserController extends BaseController implements UserControllerInterface {
   }
   async update(req: Request, res: Response) {
     try {
-      const result = await UserService.update(req.params.userId, req.body);
+      const result = await Role.update(req.params.roleId, req.body);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -46,7 +46,7 @@ class UserController extends BaseController implements UserControllerInterface {
   }
   async delete(req: Request, res: Response) {
     try {
-      const result = await UserService.delete(req.params.userId);
+      const result = await Role.delete(req.params.roleId);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -54,4 +54,4 @@ class UserController extends BaseController implements UserControllerInterface {
   }
 }
 
-export default new UserController();
+export default new RoleController();
