@@ -1,19 +1,12 @@
 import { Op } from 'sequelize';
+import { BaseServiceInterface } from 'src/declarations/base-service';
 import { Role } from '../../database/models/role.model';
 
 type CreateRolePayload = {
   role: string;
 };
 
-interface UserServiceInterface {
-  get(): Promise<Role[]>;
-  getById(id: string): Promise<Role>;
-  create(payload: CreateRolePayload): Promise<Role>;
-  update(id: string, payload: Partial<CreateRolePayload>): Promise<Role>;
-  delete(id: string): Promise<Role | null>;
-}
-
-class RoleService implements UserServiceInterface {
+class RoleService implements BaseServiceInterface<Role, CreateRolePayload> {
   model = Role;
 
   public async get() {

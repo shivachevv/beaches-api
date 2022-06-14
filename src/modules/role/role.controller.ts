@@ -1,16 +1,11 @@
 import { Request, Response } from 'express';
-import BaseController from '../../declarations/base-controller';
+import {
+  BaseController,
+  BaseControllerInterface,
+} from '../../declarations/base-controller';
 import Role from './role.service';
 
-interface UserControllerInterface {
-  get(req: Request, res: Response): Promise<Response>;
-  getById(req: Request, res: Response): Promise<Response>;
-  create(req: Request, res: Response): Promise<Response>;
-  update(req: Request, res: Response): Promise<Response>;
-  delete(req: Request, res: Response): Promise<Response>;
-}
-
-class RoleController extends BaseController implements UserControllerInterface {
+class RoleController extends BaseController implements BaseControllerInterface {
   public async get(req: Request, res: Response) {
     try {
       const result = await Role.get();
