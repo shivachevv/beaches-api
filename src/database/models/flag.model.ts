@@ -3,7 +3,7 @@ import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
 
 interface FlagInterface {
-  id: string;
+  id?: string;
   flag: string;
   createdAt?: string;
   updatedAt?: string;
@@ -17,7 +17,7 @@ interface FlagInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Flag extends Model<FlagInterface> implements FlagInterface {
-  public id!: string;
+  public id?: string;
   public flag!: string;
   public createdAt?: string;
   public updatedAt?: string;
@@ -66,7 +66,7 @@ export const FlagInit = (sequelize: Sequelize) => {
       Flag.id = uuidv4();
     });
 
-    Flag.belongsTo(models.Beach(sequelize), {
+    Flag.hasMany(models.Beach(sequelize), {
       foreignKey: 'flagId',
     });
   };

@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import { BaseServiceInterface } from 'src/declarations/base-service';
 import { User } from '../../database/models/user.model';
 
 type CreateUserPayload = {
@@ -9,15 +10,7 @@ type CreateUserPayload = {
   roleId: string;
 };
 
-interface UserServiceInterface {
-  get(): Promise<User[]>;
-  getById(id: string): Promise<User>;
-  create(payload: CreateUserPayload): Promise<User>;
-  update(id: string, payload: Partial<CreateUserPayload>): Promise<User>;
-  delete(id: string): Promise<User | null>;
-}
-
-class UserService implements UserServiceInterface {
+class UserService implements BaseServiceInterface<User, CreateUserPayload> {
   model = User;
 
   public async get() {

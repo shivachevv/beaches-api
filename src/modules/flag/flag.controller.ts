@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import UserService from './user.service';
 import {
   BaseController,
   BaseControllerInterface,
 } from '../../declarations/base-controller';
+import Flag from './flag.service';
 
-class UserController extends BaseController implements BaseControllerInterface {
+class FlagController extends BaseController implements BaseControllerInterface {
   public async get(req: Request, res: Response) {
     try {
-      const result = await UserService.get();
+      const result = await Flag.get();
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -16,7 +16,7 @@ class UserController extends BaseController implements BaseControllerInterface {
   }
   public async getById(req: Request, res: Response) {
     try {
-      const result = await UserService.getById(req.params.userId);
+      const result = await Flag.getById(req.params.flagId);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -25,7 +25,7 @@ class UserController extends BaseController implements BaseControllerInterface {
 
   async create(req: Request, res: Response) {
     try {
-      const result = await UserService.create(req.body);
+      const result = await Flag.create(req.body);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -33,7 +33,7 @@ class UserController extends BaseController implements BaseControllerInterface {
   }
   async update(req: Request, res: Response) {
     try {
-      const result = await UserService.update(req.params.userId, req.body);
+      const result = await Flag.update(req.params.flagId, req.body);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -41,7 +41,7 @@ class UserController extends BaseController implements BaseControllerInterface {
   }
   async delete(req: Request, res: Response) {
     try {
-      const result = await UserService.delete(req.params.userId);
+      const result = await Flag.delete(req.params.flagId);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -49,4 +49,4 @@ class UserController extends BaseController implements BaseControllerInterface {
   }
 }
 
-export default new UserController();
+export default new FlagController();

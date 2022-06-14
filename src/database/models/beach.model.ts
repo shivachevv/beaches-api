@@ -121,7 +121,7 @@ export const BeachInit = (sequelize: Sequelize) => {
       Beach.id = uuidv4();
     });
 
-    Beach.hasOne(models.Flag(sequelize), { foreignKey: 'flagId' });
+    Beach.belongsTo(models.Flag(sequelize), { foreignKey: 'flagId' });
     Beach.hasOne(models.User(sequelize), { foreignKey: 'beachAdminId' });
     Beach.hasMany(models.UserBeach(sequelize), {
       foreignKey: 'beachId',
