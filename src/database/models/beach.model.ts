@@ -3,20 +3,20 @@ import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
 
 interface BeachInterface {
-  id: string;
+  id?: string;
   name: string;
-  description: string;
+  description?: string;
   beachAdminId: string;
-  availableSets: string;
-  capacitySets: string;
+  availableSets: number;
+  capacitySets: number;
   flagId: string;
-  seatPrice: string;
-  umbrellaPrice: string;
-  coordinateLat: string;
-  coordinateLng: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
+  seatPrice: number;
+  umbrellaPrice: number;
+  coordinateLat: number;
+  coordinateLng: number;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
 
@@ -26,20 +26,20 @@ interface BeachInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Beach extends Model<BeachInterface> implements BeachInterface {
-  public id!: string;
+  public id?: string;
   public name!: string;
-  public description!: string;
+  public description?: string;
   public beachAdminId!: string;
-  public availableSets!: string;
-  public capacitySets!: string;
+  public availableSets!: number;
+  public capacitySets!: number;
   public flagId!: string;
-  public seatPrice!: string;
-  public umbrellaPrice!: string;
-  public coordinateLat!: string;
-  public coordinateLng!: string;
-  public createdAt!: string;
-  public updatedAt!: string;
-  public deletedAt!: string;
+  public seatPrice!: number;
+  public umbrellaPrice!: number;
+  public coordinateLat!: number;
+  public coordinateLng!: number;
+  public createdAt?: string;
+  public updatedAt?: string;
+  public deletedAt?: string;
   static associate: (models: any) => {};
 }
 
