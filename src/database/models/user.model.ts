@@ -97,7 +97,7 @@ export const UserInit = (sequelize: Sequelize) => {
     User.belongsTo(models.Beach(sequelize), {
       foreignKey: 'beachAdminId',
     });
-    User.hasMany(models.UserBeach(sequelize), {
+    User.belongsTo(models.UserBeach(sequelize), {
       foreignKey: 'userId',
     });
   };

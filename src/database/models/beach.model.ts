@@ -123,7 +123,7 @@ export const BeachInit = (sequelize: Sequelize) => {
 
     Beach.belongsTo(models.Flag(sequelize), { foreignKey: 'flagId' });
     Beach.hasOne(models.User(sequelize), { foreignKey: 'beachAdminId' });
-    Beach.hasMany(models.UserBeach(sequelize), {
+    Beach.belongsTo(models.UserBeach(sequelize), {
       foreignKey: 'beachId',
     });
   };
