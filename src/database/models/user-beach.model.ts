@@ -3,7 +3,7 @@ import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
 
 interface UserBeachInterface {
-  id: string;
+  id?: string;
   userId: string;
   beachId: string;
   sets: number;
@@ -24,7 +24,7 @@ export class UserBeach
   extends Model<UserBeachInterface>
   implements UserBeachInterface
 {
-  public id!: string;
+  public id?: string;
   public userId!: string;
   public beachId!: string;
   public sets!: number;
@@ -94,8 +94,8 @@ export const UserBeachInit = (sequelize: Sequelize) => {
       UserBeach.id = uuidv4();
     });
 
-    UserBeach.belongsTo(models.User(sequelize), { foreignKey: 'userId' });
-    UserBeach.belongsTo(models.Beach(sequelize), { foreignKey: 'beachId' });
+    UserBeach.hasOne(models.User(sequelize), { foreignKey: 'userId' });
+    UserBeach.hasOne(models.Beach(sequelize), { foreignKey: 'beachId' });
   };
 
   return UserBeach;

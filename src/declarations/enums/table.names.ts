@@ -3,7 +3,7 @@ enum TableNames {
   ROLE = 'Role',
   BEACH = 'Beach',
   FLAG = 'Flag',
-  USER_BEACH = 'User_Beach',
+  USER_BEACH = 'UserBeach',
 }
 
 export default TableNames;
