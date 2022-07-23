@@ -94,8 +94,8 @@ export const UserBeachInit = (sequelize: Sequelize) => {
       UserBeach.id = uuidv4();
     });
 
-    UserBeach.hasOne(models.User(sequelize), { foreignKey: 'userId' });
-    UserBeach.hasOne(models.Beach(sequelize), { foreignKey: 'beachId' });
+    UserBeach.belongsTo(models.User(sequelize), { foreignKey: 'userId' });
+    UserBeach.belongsTo(models.Beach(sequelize), { foreignKey: 'beachId' });
   };
 
   return UserBeach;

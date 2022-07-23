@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import Methods from './enums/methods';
 
 export type RouteController = (
   req: Request,

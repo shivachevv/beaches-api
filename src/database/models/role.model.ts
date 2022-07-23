@@ -67,7 +67,7 @@ export const RoleInit = (sequelize: Sequelize) => {
     });
 
     Role.hasMany(models.User(sequelize), {
-      foreignKey: 'userId',
+      foreignKey: 'roleId',
     });
   };
 
