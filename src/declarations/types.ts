@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import Methods from './enums/methods';
 
 export type RouteController = (
   req: Request,
@@ -12,3 +11,12 @@ export interface RouteParams {
   res: Response;
   next: NextFunction;
 }
+
+export type CreateUserPayload = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  deposit: number;
+  roleId: string;
+};

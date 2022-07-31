@@ -5,6 +5,7 @@ import roleRoutes from './role.routes';
 import flagRoutes from './flag.routes';
 import beachRoutes from './beach.routes';
 import userBeachRoutes from './user-beach.routes';
+import authRoutes from './auth.routes';
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ export default (app: Application): void => {
   app.use(roleRoutes(router));
   app.use(flagRoutes(router));
   app.use(beachRoutes(router));
+  app.use(authRoutes(router));
   app.use(mainRoutes(router));
 };

@@ -1,11 +1,16 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from '../../declarations/base-service';
-import { CreateUserPayload } from '../../declarations/types';
 import { User } from '../../database/models/user.model';
-import { createHashedPassword } from '../../lib/helpers/create-hashed-password';
-import { createAccessToken } from '../../lib/helpers/create-access-token';
-import { createRefreshToken } from '../../lib/helpers/create-refresh-token';
-require('dotenv').config();
+
+type CreateUserPayload = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  deposit: number;
+  roleId: string;
+};
+
 class UserService implements BaseServiceInterface<User, CreateUserPayload> {
   model = User;
 
@@ -14,7 +19,7 @@ class UserService implements BaseServiceInterface<User, CreateUserPayload> {
   }
 
   public async create(payload: CreateUserPayload) {
-    const { email, password } = payload;
+    const { email } = payload;
     const existing = await this.model.findOne({
       where: {
         email,
@@ -25,18 +30,7 @@ class UserService implements BaseServiceInterface<User, CreateUserPayload> {
       throw new Error('User with this email already exists!');
     }
 
-    const hashedPassword = await createHashedPassword(password);
-
-    const user = await this.model.create({
-      ...payload,
-      password: hashedPassword,
-    });
-
-    const accessToken = createAccessToken(user);
-
-    const refreshToken = createRefreshToken(user);
-
-    return { accessToken, user, refreshToken };
+    return await this.model.create(payload);
   }
 
   public async update(id: string, payload: CreateUserPayload) {
