@@ -12,6 +12,11 @@ declare global {
       DB_PROTOCOL: string;
       DB_PORT: string;
       DB_HOST: string;
+      ACCESS_JWT_SECRET: string;
+      REFRESH_JWT_SECRET: string;
+      ACCESS_JWT_LIFE: string;
+      REFRESH_JWT_LIFE: string;
+      SALT_ROUNDS: string;
     }
   }
 }

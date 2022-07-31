@@ -6,6 +6,7 @@ import { models } from './index';
 export interface UserInterface {
   id?: string;
   email: string;
+  password: string;
   firstName: string;
   lastName: string;
   deposit: number;
@@ -25,6 +26,7 @@ export interface UserInterface {
 export class User extends Model<UserInterface> implements UserInterface {
   public id?: string;
   public email!: string;
+  public password!: string;
   public firstName!: string;
   public lastName!: string;
   public deposit!: number;
@@ -48,6 +50,11 @@ export const UserInit = (sequelize: Sequelize) => {
         allowNull: false,
         type: DataTypes.STRING(100),
         unique: true,
+      },
+      password: {
+        allowNull: false,
+        type: DataTypes.STRING(100),
+        defaultValue: '',
       },
       firstName: {
         allowNull: false,
