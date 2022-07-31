@@ -5,12 +5,19 @@ import { User } from '../../database/models/user.model';
 import { createHashedPassword } from '../../lib/helpers/create-hashed-password';
 import { createAccessToken } from '../../lib/helpers/create-access-token';
 import { createRefreshToken } from '../../lib/helpers/create-refresh-token';
+import { getFilters, getPagination } from '../../lib/helpers/query-helpers';
 require('dotenv').config();
+
 class UserService implements BaseServiceInterface<User, CreateUserPayload> {
   model = User;
 
-  public async get() {
-    return await this.model.findAll();
+  public async get(query: Record<string, any> | undefined) {
+    return await this.model.findAll({
+      ...getPagination(query),
+      where: {
+        ...getFilters(query),
+      },
+    });
   }
 
   public async create(payload: CreateUserPayload) {

@@ -8,7 +8,7 @@ import {
 class UserController extends BaseController implements BaseControllerInterface {
   public async get(req: Request, res: Response) {
     try {
-      const result = await UserService.get();
+      const result = await UserService.get(req.query);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
