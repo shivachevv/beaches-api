@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
 import { Flag } from '../../database/models/flag.model';
+import { getFilters, getPagination } from '../../lib/helpers/query-helpers';
 
 type CreateFlagPayload = {
   flag: string;
@@ -9,8 +10,13 @@ type CreateFlagPayload = {
 class FlagService implements BaseServiceInterface<Flag, CreateFlagPayload> {
   model = Flag;
 
-  public async get() {
-    return await this.model.findAll();
+  public async get(query: Record<string, any> | undefined) {
+    return await this.model.findAll({
+      ...getPagination(query),
+      where: {
+        ...getFilters(query),
+      },
+    });
   }
 
   public async create(payload: CreateFlagPayload) {

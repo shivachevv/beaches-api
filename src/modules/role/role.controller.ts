@@ -8,7 +8,7 @@ import Role from './role.service';
 class RoleController extends BaseController implements BaseControllerInterface {
   public async get(req: Request, res: Response) {
     try {
-      const result = await Role.get();
+      const result = await Role.get(req.query);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);

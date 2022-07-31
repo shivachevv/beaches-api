@@ -11,7 +11,7 @@ class BeachController
 {
   public async get(req: Request, res: Response) {
     try {
-      const result = await Beach.get();
+      const result = await Beach.get(req.query);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(400).json(error.message);
