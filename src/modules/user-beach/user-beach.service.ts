@@ -1,5 +1,10 @@
 import { BaseServiceInterface } from 'src/declarations/base-service';
 import { UserBeach } from '../../database/models/user-beach.model';
+import {
+  getFilters,
+  getOrder,
+  getPagination,
+} from '../../lib/helpers/query-helpers';
 
 type CreateUserBeachPayload = {
   userId: string;
@@ -14,8 +19,14 @@ class UserBeachService
 {
   model = UserBeach;
 
-  public async get() {
-    return await this.model.findAll();
+  public async get(query: Record<string, any> | undefined) {
+    return await this.model.findAll({
+      ...getPagination(query),
+      where: {
+        ...getFilters(query),
+      },
+      order: [...getOrder(query)],
+    });
   }
 
   public async create(payload: CreateUserBeachPayload) {

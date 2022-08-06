@@ -1,7 +1,11 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
 import { Flag } from '../../database/models/flag.model';
-import { getFilters, getPagination } from '../../lib/helpers/query-helpers';
+import {
+  getFilters,
+  getOrder,
+  getPagination,
+} from '../../lib/helpers/query-helpers';
 
 type CreateFlagPayload = {
   flag: string;
@@ -16,6 +20,7 @@ class FlagService implements BaseServiceInterface<Flag, CreateFlagPayload> {
       where: {
         ...getFilters(query),
       },
+      order: [...getOrder(query)],
     });
   }
 

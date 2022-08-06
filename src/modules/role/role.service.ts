@@ -1,7 +1,11 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
 import { Role } from '../../database/models/role.model';
-import { getFilters, getPagination } from '../../lib/helpers/query-helpers';
+import {
+  getFilters,
+  getPagination,
+  getOrder,
+} from '../../lib/helpers/query-helpers';
 
 type CreateRolePayload = {
   role: string;
@@ -16,6 +20,7 @@ class RoleService implements BaseServiceInterface<Role, CreateRolePayload> {
       where: {
         ...getFilters(query),
       },
+      order: [...getOrder(query)],
     });
   }
 

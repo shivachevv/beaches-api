@@ -11,7 +11,11 @@ export default (router: Router) => {
     authenticate,
     RoleController.getById
   );
-  router.get('/roles', authenticate, RoleController.get);
+  router.get(
+    '/roles',
+    // authenticate,
+    RoleController.get
+  );
   router.post(
     '/roles',
     authenticate,
