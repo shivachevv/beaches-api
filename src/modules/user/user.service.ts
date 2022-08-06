@@ -5,7 +5,11 @@ import { User } from '../../database/models/user.model';
 import { createHashedPassword } from '../../lib/helpers/create-hashed-password';
 import { createAccessToken } from '../../lib/helpers/create-access-token';
 import { createRefreshToken } from '../../lib/helpers/create-refresh-token';
-import { getFilters, getPagination } from '../../lib/helpers/query-helpers';
+import {
+  getFilters,
+  getOrder,
+  getPagination,
+} from '../../lib/helpers/query-helpers';
 require('dotenv').config();
 
 class UserService implements BaseServiceInterface<User, CreateUserPayload> {
@@ -17,6 +21,7 @@ class UserService implements BaseServiceInterface<User, CreateUserPayload> {
       where: {
         ...getFilters(query),
       },
+      order: [...getOrder(query)],
     });
   }
 

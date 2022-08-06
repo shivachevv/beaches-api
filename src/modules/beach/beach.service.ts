@@ -1,7 +1,11 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
 import { Beach } from '../../database/models/beach.model';
-import { getFilters, getPagination } from '../../lib/helpers/query-helpers';
+import {
+  getFilters,
+  getOrder,
+  getPagination,
+} from '../../lib/helpers/query-helpers';
 
 type CreateBeachPayload = {
   name: string;
@@ -25,6 +29,7 @@ class BeachService implements BaseServiceInterface<Beach, CreateBeachPayload> {
       where: {
         ...getFilters(query),
       },
+      order: [...getOrder(query)],
     });
   }
 
