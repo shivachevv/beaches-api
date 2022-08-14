@@ -7,7 +7,9 @@ import { models } from './models';
 // import { UserBeachInit } from './models/user-beach.model';
 require('dotenv').config();
 
-const dbName = process.env.DB_NAME as string;
+const testDbName = process.env.TEST_DB_NAME as string;
+
+const devDbName = process.env.DB_NAME as string;
 const dbUser = process.env.DB_USER as string;
 const dbPassword = process.env.DB_PASSWORD;
 const dbHost = process.env.DB_HOST;
@@ -15,8 +17,10 @@ const dbDialect = process.env.DB_DIALECT as Dialect;
 const dbProtocol = process.env.DB_PROTOCOL as string;
 const dbPort = +process.env.DB_PORT! as number;
 
+const dbName = process.env.NODE_ENV === 'development' ? devDbName : testDbName;
+
 export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-  dialect: dbDialect,
+  dialect: 'postgres',
   protocol: dbProtocol,
   host: dbHost,
   port: dbPort,
@@ -27,12 +31,14 @@ export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   },
 });
 
-export const dbInitialize = () => {
+export const dbInitialize = async () => {
   Object.values(models).forEach((model) => model(sequelize));
   Object.values(models).forEach((model) => {
     model(sequelize).associate(models);
   });
-  console.log('Database successfully initialized!');
+  console.log(
+    `Database: ${sequelize.config.database} successfully initialized!`
+  );
 };
 
 // export default {

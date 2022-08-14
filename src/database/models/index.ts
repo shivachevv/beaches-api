@@ -20,10 +20,10 @@ export const models: ModelsInit = {
   Flag: FlagInit,
   UserBeach: UserBeachInit,
 };
-// export const models = {
-//   User: User(sequelize),
-//   Role: Role(sequelize),
-//   Beach: Beach(sequelize),
-//   Flag: Flag(sequelize),
-//   UserBeach: UserBeach(sequelize),
+// export const modelsInstances = {
+//   User: new User(sequelize),
+//   Role: new Role(sequelize),
+//   Beach: new Beach(sequelize),
+//   Flag: new Flag(sequelize),
+//   UserBeach: new UserBeach(sequelize),
 // };

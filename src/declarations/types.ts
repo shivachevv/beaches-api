@@ -20,3 +20,12 @@ export type CreateUserPayload = {
   deposit: number;
   roleId: string;
 };
+
+export type UpdateUserPayload = {
+  email?: string;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  deposit?: number;
+  roleId?: string;
+};

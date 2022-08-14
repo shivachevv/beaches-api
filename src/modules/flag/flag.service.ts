@@ -50,9 +50,13 @@ class FlagService implements BaseServiceInterface<Flag, CreateFlagPayload> {
       throw new Error('A flag with this ID does not exist!');
     }
 
+    if (!payload.flag) {
+      return await flag.update(payload);
+    }
+
     const roleNameCheck = await this.model.findOne({
       where: {
-        flag: flag.flag,
+        flag: payload.flag,
         [Op.not]: [{ id }],
       },
     });
