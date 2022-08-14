@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from '../../declarations/base-service';
-import { CreateUserPayload } from '../../declarations/types';
+import { CreateUserPayload, UpdateUserPayload } from '../../declarations/types';
 import { User } from '../../database/models/user.model';
 import { createHashedPassword } from '../../lib/helpers/create-hashed-password';
 import { createAccessToken } from '../../lib/helpers/create-access-token';
@@ -51,7 +51,7 @@ class UserService implements BaseServiceInterface<User, CreateUserPayload> {
     return { accessToken, user, refreshToken };
   }
 
-  public async update(id: string, payload: CreateUserPayload) {
+  public async update(id: string, payload: UpdateUserPayload) {
     const user = await this.model.findOne({
       where: {
         id,
@@ -62,9 +62,13 @@ class UserService implements BaseServiceInterface<User, CreateUserPayload> {
       throw new Error('A user with this ID does not exist!');
     }
 
+    if (!payload.email) {
+      return await user.update(payload);
+    }
+
     const userEmailCheck = await this.model.findOne({
       where: {
-        email: user.email,
+        email: payload.email,
         [Op.not]: [{ id }],
       },
     });

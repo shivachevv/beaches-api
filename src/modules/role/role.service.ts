@@ -50,9 +50,13 @@ class RoleService implements BaseServiceInterface<Role, CreateRolePayload> {
       throw new Error('A role with this ID does not exist!');
     }
 
+    if (!payload.role) {
+      return await role.update(payload);
+    }
+
     const roleNameCheck = await this.model.findOne({
       where: {
-        role: role.role,
+        role: payload.role,
         [Op.not]: [{ id }],
       },
     });

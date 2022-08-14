@@ -20,6 +20,19 @@ type CreateBeachPayload = {
   coordinateLng: number;
 };
 
+type UpdateBeachPayload = {
+  name?: string;
+  description?: string;
+  beachAdminId?: string;
+  availableSets?: number;
+  capacitySets?: number;
+  flagId?: string;
+  seatPrice?: number;
+  umbrellaPrice?: number;
+  coordinateLat?: number;
+  coordinateLng?: number;
+};
+
 class BeachService implements BaseServiceInterface<Beach, CreateBeachPayload> {
   model = Beach;
 
@@ -52,7 +65,7 @@ class BeachService implements BaseServiceInterface<Beach, CreateBeachPayload> {
     }
   }
 
-  public async update(id: string, payload: CreateBeachPayload) {
+  public async update(id: string, payload: UpdateBeachPayload) {
     const beach = await this.model.findOne({
       where: {
         id,
@@ -61,6 +74,10 @@ class BeachService implements BaseServiceInterface<Beach, CreateBeachPayload> {
 
     if (!beach) {
       throw new Error('A beach with this ID does not exist!');
+    }
+
+    if (!payload.name) {
+      return await beach.update(payload);
     }
 
     const beachNameCheck = await this.model.findOne({
