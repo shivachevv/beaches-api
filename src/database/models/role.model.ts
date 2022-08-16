@@ -17,11 +17,11 @@ export interface RoleInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Role extends Model<RoleInterface> implements RoleInterface {
-  public id?: string;
-  public role!: string;
-  public createdAt?: string;
-  public updatedAt?: string;
-  public deletedAt?: string;
+  declare id?: string;
+  declare role: string;
+  declare createdAt?: string;
+  declare updatedAt?: string;
+  declare deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -66,9 +66,9 @@ export const RoleInit = (sequelize: Sequelize) => {
       Role.id = uuidv4();
     });
 
-    Role.hasMany(models.User(sequelize), {
-      foreignKey: 'roleId',
-    });
+    // Role.hasOne(models.User(sequelize), {
+    //   foreignKey: 'roleId',
+    // });
   };
 
   return Role;

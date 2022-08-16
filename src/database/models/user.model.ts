@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
-import { models } from './index';
+// import { models } from './index';
 
 export interface UserInterface {
   id?: string;
@@ -24,16 +24,16 @@ export interface UserInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class User extends Model<UserInterface> implements UserInterface {
-  public id?: string;
-  public email!: string;
-  public password!: string;
-  public firstName!: string;
-  public lastName!: string;
-  public deposit!: number;
-  public roleId!: string;
-  public createdAt?: string;
-  public updatedAt?: string;
-  public deletedAt?: string;
+  declare id?: string;
+  declare email: string;
+  declare password: string;
+  declare firstName: string;
+  declare lastName: string;
+  declare deposit: number;
+  declare roleId: string;
+  declare createdAt?: string;
+  declare updatedAt?: string;
+  declare deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -100,11 +100,11 @@ export const UserInit = (sequelize: Sequelize) => {
   });
 
   User.associate = (models: any): any => {
-    User.belongsTo(models.Role(sequelize), { foreignKey: 'roleId' });
-    User.belongsTo(models.Beach(sequelize), {
-      foreignKey: 'beachAdminId',
-    });
-    User.hasMany(models.UserBeach(sequelize), { foreignKey: 'userId' });
+    // User.belongsTo(models.Role(sequelize), { foreignKey: 'roleId' });
+    // User.belongsTo(models.Beach(sequelize), {
+    //   foreignKey: 'beachAdminId',
+    // });
+    // User.hasMany(models.UserBeach(sequelize), { foreignKey: 'userId' });
   };
 
   return User;
