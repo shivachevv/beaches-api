@@ -1,5 +1,5 @@
 import { Dialect, Sequelize } from 'sequelize';
-import { models } from './models';
+import { User, Role, Flag, Beach, UserBeach } from './models';
 // import { UserInit } from './models/user.model';
 // import { RoleInit } from './models/beach.model';
 // import { BeachInit } from './models/flag.model';
@@ -32,10 +32,46 @@ export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
 });
 
 export const dbInitialize = async () => {
-  Object.values(models).forEach((model) => model(sequelize));
-  Object.values(models).forEach((model) => {
-    model(sequelize).associate(models);
+  // Object.values(models).forEach((model) => model(sequelize));
+  // Object.values(models).forEach((model) => {
+  //   model(sequelize).associate(models);
+  // });
+
+  Beach.belongsTo(Flag, {
+    foreignKey: 'flagId',
   });
+  Beach.belongsTo(User, {
+    foreignKey: 'beachAdminId',
+  });
+  Beach.belongsTo(UserBeach, {
+    foreignKey: 'beachId',
+  });
+
+  Flag.hasMany(Beach, {
+    foreignKey: 'flagId',
+  });
+
+  Role.hasOne(User, {
+    foreignKey: 'roleId',
+  });
+
+  UserBeach.belongsTo(User, {
+    foreignKey: 'userId',
+  });
+  UserBeach.belongsTo(Beach, {
+    foreignKey: 'beachId',
+  });
+
+  User.belongsTo(Role, {
+    foreignKey: 'roleId',
+  });
+  User.hasMany(Beach, {
+    foreignKey: 'beachAdminId',
+  });
+  User.hasMany(UserBeach, {
+    foreignKey: 'userId',
+  });
+
   console.log(
     `Database: ${sequelize.config.database} successfully initialized!`
   );

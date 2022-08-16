@@ -26,20 +26,20 @@ interface BeachInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Beach extends Model<BeachInterface> implements BeachInterface {
-  public id?: string;
-  public name!: string;
-  public description?: string;
-  public beachAdminId!: string;
-  public availableSets!: number;
-  public capacitySets!: number;
-  public flagId!: string;
-  public seatPrice!: number;
-  public umbrellaPrice!: number;
-  public coordinateLat!: number;
-  public coordinateLng!: number;
-  public createdAt?: string;
-  public updatedAt?: string;
-  public deletedAt?: string;
+  declare id?: string;
+  declare name: string;
+  declare description?: string;
+  declare beachAdminId: string;
+  declare availableSets: number;
+  declare capacitySets: number;
+  declare flagId: string;
+  declare seatPrice: number;
+  declare umbrellaPrice: number;
+  declare coordinateLat: number;
+  declare coordinateLng: number;
+  declare createdAt?: string;
+  declare updatedAt?: string;
+  declare deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -121,11 +121,11 @@ export const BeachInit = (sequelize: Sequelize) => {
       Beach.id = uuidv4();
     });
 
-    Beach.belongsTo(models.Flag(sequelize), { foreignKey: 'flagId' });
-    Beach.hasOne(models.User(sequelize), { foreignKey: 'beachAdminId' });
-    Beach.belongsTo(models.UserBeach(sequelize), {
-      foreignKey: 'beachId',
-    });
+    // Beach.belongsTo(models.Flag(sequelize), { foreignKey: 'flagId' });
+    // Beach.hasOne(models.User(sequelize), { foreignKey: 'beachAdminId' });
+    // Beach.belongsTo(models.UserBeach(sequelize), {
+    //   foreignKey: 'beachId',
+    // });
   };
 
   return Beach;

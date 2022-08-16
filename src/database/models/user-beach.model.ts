@@ -24,15 +24,15 @@ export class UserBeach
   extends Model<UserBeachInterface>
   implements UserBeachInterface
 {
-  public id?: string;
-  public userId!: string;
-  public beachId!: string;
-  public sets!: number;
-  public seatPrice!: number;
-  public umbrellaPrice!: number;
-  public createdAt?: string;
-  public updatedAt?: string;
-  public deletedAt?: string;
+  declare id?: string;
+  declare userId: string;
+  declare beachId: string;
+  declare sets: number;
+  declare seatPrice: number;
+  declare umbrellaPrice: number;
+  declare createdAt?: string;
+  declare updatedAt?: string;
+  declare deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -94,8 +94,8 @@ export const UserBeachInit = (sequelize: Sequelize) => {
       UserBeach.id = uuidv4();
     });
 
-    UserBeach.belongsTo(models.User(sequelize), { foreignKey: 'userId' });
-    UserBeach.belongsTo(models.Beach(sequelize), { foreignKey: 'beachId' });
+    // UserBeach.belongsTo(models.User(sequelize), { foreignKey: 'userId' });
+    // UserBeach.belongsTo(models.Beach(sequelize), { foreignKey: 'beachId' });
   };
 
   return UserBeach;

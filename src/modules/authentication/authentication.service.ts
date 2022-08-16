@@ -1,4 +1,4 @@
-import { User } from '../../database/models/user.model';
+import { User } from '../../database/models';
 import {
   AuthServiceInterface,
   LoginPayload,
@@ -8,6 +8,7 @@ import bcryptjs from 'bcryptjs';
 import { createAccessToken } from '../../lib/helpers/create-access-token';
 import { createRefreshToken } from '../../lib/helpers/create-refresh-token';
 import { verifyRefresh } from '../../lib/helpers/verify-refresh-token';
+import { Role } from '../../database/models/role.model';
 require('dotenv').config();
 
 class AuthService implements AuthServiceInterface {
@@ -16,6 +17,7 @@ class AuthService implements AuthServiceInterface {
 
     const user = await User.findOne({
       where: { email },
+      include: { model: Role },
     });
 
     if (!user) {

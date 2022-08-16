@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../../database/models/user.model';
 import { decodeAccessToken } from './decode-access-token';

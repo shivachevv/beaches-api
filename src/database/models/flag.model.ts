@@ -17,11 +17,11 @@ interface FlagInterface {
 // export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Flag extends Model<FlagInterface> implements FlagInterface {
-  public id?: string;
-  public flag!: string;
-  public createdAt?: string;
-  public updatedAt?: string;
-  public deletedAt?: string;
+  declare id?: string;
+  declare flag: string;
+  declare createdAt?: string;
+  declare updatedAt?: string;
+  declare deletedAt?: string;
   static associate: (models: any) => {};
 }
 
@@ -66,9 +66,9 @@ export const FlagInit = (sequelize: Sequelize) => {
       Flag.id = uuidv4();
     });
 
-    Flag.hasMany(models.Beach(sequelize), {
-      foreignKey: 'flagId',
-    });
+    // Flag.hasMany(models.Beach(sequelize), {
+    //   foreignKey: 'flagId',
+    // });
   };
 
   return Flag;
