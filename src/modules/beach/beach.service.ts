@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
-import { Beach } from '../../database/models/beach.model';
+import { Beach } from '../../database/db.connection';
 import {
   getFilters,
   getOrder,
@@ -33,7 +33,9 @@ type UpdateBeachPayload = {
   coordinateLng?: number;
 };
 
-class BeachService implements BaseServiceInterface<Beach, CreateBeachPayload> {
+class BeachService
+  implements BaseServiceInterface<typeof Beach, CreateBeachPayload>
+{
   model = Beach;
 
   public async get(query: Record<string, any> | undefined) {

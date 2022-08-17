@@ -1,10 +1,5 @@
 import { Dialect, Sequelize } from 'sequelize';
-import { User, Role, Flag, Beach, UserBeach } from './models';
-// import { UserInit } from './models/user.model';
-// import { RoleInit } from './models/beach.model';
-// import { BeachInit } from './models/flag.model';
-// import { FlagInit } from './models/role.model';
-// import { UserBeachInit } from './models/user-beach.model';
+import { models } from './models';
 require('dotenv').config();
 
 const testDbName = process.env.TEST_DB_NAME as string;
@@ -31,11 +26,13 @@ export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   },
 });
 
+export const { Beach, Flag, Role, User, UserBeach } =
+  require('./models').getModels(sequelize);
+
 export const dbInitialize = async () => {
-  // Object.values(models).forEach((model) => model(sequelize));
-  // Object.values(models).forEach((model) => {
-  //   model(sequelize).associate(models);
-  // });
+  Object.values(models).forEach((model) => {
+    model(sequelize).associate(models);
+  });
 
   Beach.belongsTo(Flag, {
     foreignKey: 'flagId',
@@ -76,8 +73,3 @@ export const dbInitialize = async () => {
     `Database: ${sequelize.config.database} successfully initialized!`
   );
 };
-
-// export default {
-//   sequelize,
-//   models: sequelize.models,
-// };

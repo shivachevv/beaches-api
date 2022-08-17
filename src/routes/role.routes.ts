@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import RoleController from '../modules/role/role.controller';
-import { validatePayload } from '../lib/helpers/validation';
+import { validatePayload } from '../middleware/validation';
 import roleValidation from '../modules/role/role.validation';
-import { authenticate } from '../lib/helpers/authenticate';
+import { authenticate } from '../middleware/authenticate';
 import authorize from '../middleware/authorization';
 
 export default (router: Router) => {

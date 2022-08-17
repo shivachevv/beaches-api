@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
+// import { User, Beach } from '../models';
 
 interface UserBeachInterface {
   id?: string;
@@ -14,11 +15,6 @@ interface UserBeachInterface {
   deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
-
-// export interface IngredientInput
-//   extends Optional<IngredientAttributes, 'id' | 'slug'> {}
-
-// export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class UserBeach
   extends Model<UserBeachInterface>
@@ -94,8 +90,8 @@ export const UserBeachInit = (sequelize: Sequelize) => {
       UserBeach.id = uuidv4();
     });
 
-    // UserBeach.belongsTo(models.User(sequelize), { foreignKey: 'userId' });
-    // UserBeach.belongsTo(models.Beach(sequelize), { foreignKey: 'beachId' });
+    // UserBeach.belongsTo(User, { foreignKey: 'userId' });
+    // UserBeach.belongsTo(Beach, { foreignKey: 'beachId' });
   };
 
   return UserBeach;

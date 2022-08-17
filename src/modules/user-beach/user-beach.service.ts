@@ -1,5 +1,5 @@
 import { BaseServiceInterface } from 'src/declarations/base-service';
-import { UserBeach } from '../../database/models/user-beach.model';
+import { UserBeach } from '../../database/db.connection';
 import {
   getFilters,
   getOrder,
@@ -15,7 +15,7 @@ type CreateUserBeachPayload = {
 };
 
 class UserBeachService
-  implements BaseServiceInterface<UserBeach, CreateUserBeachPayload>
+  implements BaseServiceInterface<typeof UserBeach, CreateUserBeachPayload>
 {
   model = UserBeach;
 

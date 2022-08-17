@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from '../../declarations/base-service';
 import { CreateUserPayload, UpdateUserPayload } from '../../declarations/types';
-import { User } from '../../database/models/user.model';
+import { User } from '../../database/db.connection';
 import { createHashedPassword } from '../../lib/helpers/create-hashed-password';
 import { createAccessToken } from '../../lib/helpers/create-access-token';
 import { createRefreshToken } from '../../lib/helpers/create-refresh-token';
@@ -12,7 +12,9 @@ import {
 } from '../../lib/helpers/query-helpers';
 require('dotenv').config();
 
-class UserService implements BaseServiceInterface<User, CreateUserPayload> {
+class UserService
+  implements BaseServiceInterface<typeof User, CreateUserPayload>
+{
   model = User;
 
   public async get(query: Record<string, any> | undefined) {

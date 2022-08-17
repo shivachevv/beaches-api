@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import BeachController from '../modules/beach/beach.controller';
-import { validatePayload } from '../lib/helpers/validation';
+import { validatePayload } from '../middleware/validation';
 import beachValidation from '../modules/beach/beach.validation';
-import { authenticate } from '../lib/helpers/authenticate';
+import { authenticate } from '../middleware/authenticate';
 import authorize from '../middleware/authorization';
 
 export default (router: Router) => {
