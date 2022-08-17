@@ -1,10 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { User } from '../../database/models/user.model';
-import { decodeAccessToken } from './decode-access-token';
-
-interface IUserRequest extends Request {
-  user: User;
-}
+import { User } from '../database/models/user.model';
+import { decodeAccessToken } from '../lib/helpers/decode-access-token';
 
 export const authenticate = (
   req: Request,

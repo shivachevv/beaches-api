@@ -1,15 +1,15 @@
 import Joi from 'joi';
 import Flags from '../../declarations/enums/flags';
 import Methods from '../../declarations/enums/methods';
-import { ValidationData } from '../../lib/helpers/validation';
+import { ValidationData } from '../../middleware/validation';
 
 const flagValidation: ValidationData = {
   schemaRulesMap: {
     [Methods.POST]: {
-      role: Joi.string().valid(Flags.GREEN, Flags.YELLOW, Flags.RED).required(),
+      flag: Joi.string().valid(Flags.GREEN, Flags.YELLOW, Flags.RED).required(),
     },
     [Methods.PATCH]: {
-      role: Joi.string().valid(Flags.GREEN, Flags.YELLOW, Flags.RED).optional(),
+      flag: Joi.string().valid(Flags.GREEN, Flags.YELLOW, Flags.RED).optional(),
     },
   },
   schemaOptions: {

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import UserController from '../modules/user/user.controller';
-import { validatePayload } from '../lib/helpers/validation';
+import { validatePayload } from '../middleware/validation';
 import userValidation from '../modules/user/user.validation';
-import { authenticate } from '../lib/helpers/authenticate';
+import { authenticate } from '../middleware/authenticate';
 import authorize from '../middleware/authorization';
 
 export default (router: Router) => {

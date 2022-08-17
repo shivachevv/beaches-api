@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
+// import { Beach } from '../models';
 
 interface FlagInterface {
   id?: string;
@@ -10,11 +11,6 @@ interface FlagInterface {
   deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
-
-// export interface IngredientInput
-//   extends Optional<IngredientAttributes, 'id' | 'slug'> {}
-
-// export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Flag extends Model<FlagInterface> implements FlagInterface {
   declare id?: string;
@@ -66,7 +62,7 @@ export const FlagInit = (sequelize: Sequelize) => {
       Flag.id = uuidv4();
     });
 
-    // Flag.hasMany(models.Beach(sequelize), {
+    // Flag.hasMany(Beach, {
     //   foreignKey: 'flagId',
     // });
   };

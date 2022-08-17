@@ -18,11 +18,6 @@ export interface UserInterface {
   associate?(models: Record<string, any>): void;
 }
 
-// export interface IngredientInput
-//   extends Optional<IngredientAttributes, 'id' | 'slug'> {}
-
-// export interface IngredientOuput extends Required<IngredientAttributes> {}
-
 export class User extends Model<UserInterface> implements UserInterface {
   declare id?: string;
   declare email: string;

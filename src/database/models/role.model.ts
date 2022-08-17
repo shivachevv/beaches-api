@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import TableNames from '../../declarations/enums/table.names';
 import { v4 as uuidv4 } from 'uuid';
+// import { User } from '../models';
 
 export interface RoleInterface {
   id?: string;
@@ -10,11 +11,6 @@ export interface RoleInterface {
   deletedAt?: string;
   associate?(models: Record<string, any>): void;
 }
-
-// export interface IngredientInput
-//   extends Optional<IngredientAttributes, 'id' | 'slug'> {}
-
-// export interface IngredientOuput extends Required<IngredientAttributes> {}
 
 export class Role extends Model<RoleInterface> implements RoleInterface {
   declare id?: string;
@@ -66,7 +62,7 @@ export const RoleInit = (sequelize: Sequelize) => {
       Role.id = uuidv4();
     });
 
-    // Role.hasOne(models.User(sequelize), {
+    // Role.hasOne(User, {
     //   foreignKey: 'roleId',
     // });
   };

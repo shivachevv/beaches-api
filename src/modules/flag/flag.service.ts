@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
-import { Flag } from '../../database/models/flag.model';
+import { Flag } from '../../database/db.connection';
 import {
   getFilters,
   getOrder,
@@ -11,7 +11,9 @@ type CreateFlagPayload = {
   flag: string;
 };
 
-class FlagService implements BaseServiceInterface<Flag, CreateFlagPayload> {
+class FlagService
+  implements BaseServiceInterface<typeof Flag, CreateFlagPayload>
+{
   model = Flag;
 
   public async get(query: Record<string, any> | undefined) {

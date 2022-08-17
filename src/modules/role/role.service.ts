@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { BaseServiceInterface } from 'src/declarations/base-service';
-import { Role } from '../../database/models/role.model';
+import { Role } from '../../database/db.connection';
 import {
   getFilters,
   getPagination,
@@ -11,7 +11,9 @@ type CreateRolePayload = {
   role: string;
 };
 
-class RoleService implements BaseServiceInterface<Role, CreateRolePayload> {
+class RoleService
+  implements BaseServiceInterface<typeof Role, CreateRolePayload>
+{
   model = Role;
 
   public async get(query: Record<string, any> | undefined) {

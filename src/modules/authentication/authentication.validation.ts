@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import Methods from '../../declarations/enums/methods';
-import { ValidationData } from '../../lib/helpers/validation';
+import { ValidationData } from '../../middleware/validation';
 
 export const loginValidation: ValidationData = {
   schemaRulesMap: {

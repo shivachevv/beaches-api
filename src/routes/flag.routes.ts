@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import FlagController from '../modules/flag/flag.controller';
-import { validatePayload } from '../lib/helpers/validation';
+import { validatePayload } from '../middleware/validation';
 import flagValidation from '../modules/flag/flag.validation';
-import { authenticate } from '../lib/helpers/authenticate';
+import { authenticate } from '../middleware/authenticate';
 import authorize from '../middleware/authorization';
 
 export default (router: Router) => {

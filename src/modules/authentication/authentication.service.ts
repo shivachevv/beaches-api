@@ -1,4 +1,4 @@
-import { User } from '../../database/models';
+import { User } from '../../database/db.connection';
 import {
   AuthServiceInterface,
   LoginPayload,
@@ -8,7 +8,7 @@ import bcryptjs from 'bcryptjs';
 import { createAccessToken } from '../../lib/helpers/create-access-token';
 import { createRefreshToken } from '../../lib/helpers/create-refresh-token';
 import { verifyRefresh } from '../../lib/helpers/verify-refresh-token';
-import { Role } from '../../database/models/role.model';
+import { Role } from '../../database/db.connection';
 require('dotenv').config();
 
 class AuthService implements AuthServiceInterface {

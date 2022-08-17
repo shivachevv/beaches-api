@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import AuthController from '../modules/authentication/authentication.controller';
-import { validatePayload } from '../lib/helpers/validation';
+import { validatePayload } from '../middleware/validation';
 import {
   loginValidation,
   refreshValidation,
