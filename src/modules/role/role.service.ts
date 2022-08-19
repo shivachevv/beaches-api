@@ -64,7 +64,7 @@ class RoleService
     });
 
     if (roleNameCheck) {
-      throw new Error('A role with that email already exists!');
+      throw new Error('A role with that name already exists!');
     }
 
     return await role.update(payload);
